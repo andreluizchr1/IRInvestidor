@@ -33,6 +33,7 @@ public class Empresa {
 	private String cnpj;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(updatable = false, nullable = false)
 	private Date dataCadastro;
 
 	@Temporal(TemporalType.TIMESTAMP)
