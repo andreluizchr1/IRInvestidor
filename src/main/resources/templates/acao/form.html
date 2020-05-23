@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/Layout">
+
+<head>
+    <title>Cadastro de Ação</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+    <form class="form-horizontal" method="post" action="/acoes" th:object="${acao}">
+
+        <div layout:insert="Confirmacao"></div>
+        <div layout:insert="Erro"></div>
+
+        <div class="card border-primary">
+
+            <div class="card-header text-white bg-primary ">
+                <span th:text="${acao.id == null ? 'Nova Ação' : 'Editar Ação'}"></span>
+            </div>
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="card-body">
+
+                <!--Insert do Codigo da Ação-->
+                <div class="form-group row">
+                    <label for="codigoAcao" class="col-sm-2 col-form-label">Código da Ação</label>
+
+                    <div class="col-sm-10">
+                        <input th:field="*{ticker}" type="text" id="codigoAcao" aria-describedby="codigoAcaoHelp" class="form-control" placeholder="Codigo de negociação da empresa" required>
+
+                        <small id="codigoAcaoHelp" class="form-text text-muted">
+							O código é formado por letras e números. Ex: CODI3
+						</small>
+                    </div>
+
+                </div>
+
+                <!-- Select do Tipo de Ação -->
+                <div class="form-group row">
+                    <label for="tipoAcao" class="col-sm-2 col-form-label">Tipo de Ação</label>
+
+                    <div class="col-sm-10">
+                        <select th:field="*{tipoAcao}" class="form-control">
+							<option value="">Selecione...</option>
+							<option th:each="tipoAcao : ${tiposAcoes}" th:value="${tipoAcao.id}"
+								th:text="${tipoAcao.nome}"></option>
+						</select>
+                    </div>
+
+                </div>
+
+                <!-- Select da Empresa -->
+                <div class="form-group row">
+                    <label for="empresa" class="col-sm-2 col-form-label">Nome Empresa</label>
+
+                    <div class="col-sm-10">
+                        <select th:field="*{empresa}" class="form-control">
+							<option value="">Selecione...</option>
+							<option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nome}">
+							</option>
+						</select>
+                    </div>
+                </div>
+
+                <!-- Select do status da Ação-->
+                <div class="form-group row">
+                    <label for="status" class="col-sm-2 col-form-label"></label>
+
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="checkboxAtivo" id="ativo" th:field="*{ativo}">
+                            <label for="ativo" class="form-check-label">Ativo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão de Salvar -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">
+							<i class="far fa-save"></i>
+							Salvar
+						</button>
+                    </div>
+                </div>
+
+            </div>
+            <!--Fim do Conteúdo do Card-->
+
+        </div>
+        <!--Fim do Card-->
+
+    </form>
+
+</section>
+
+</html>
