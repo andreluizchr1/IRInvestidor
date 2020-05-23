@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/Layout">
+
+<head>
+    <title>Ações</title>
+</head>
+
+<section layout:fragment="conteudo">
+    <div class="container">
+
+        <div id="lista-acoes" class="list-group" th:each="acao : ${acoes}">
+            <a th:href="@{/acoes/{id} (id=${acao.id})}" class="list-group-item list-group-item-action flex-column align-items-start">
+
+                <div class="d-flex w-100 justify-content-between">
+
+                    <!-- Conteudo de Destaque -->
+                    <h5 class="mb-1" th:text="'[ ' + ${acao.ticker} + ' ]' + ' - ' + ${acao.tipoAcao.nome}"></h5>
+
+                    <small th:text="'Última Atualização: ' + ${acao.dataAtualizacao == null ? 'Não há' : #dates.format(acao.dataAtualizacao) }">3
+						dias atrás</small>
+                </div>
+
+
+                <p class="mb-1" th:text="'Empresa: ' + ${acao.empresa.nome}"></p>
+                <span class="badge badge-pill" th:text="${acao.ativo ? 'Ativo' : 'Inativo'}" th:classappend="${acao.ativo ? 'badge-success' : 'badge-danger'}"></span>
+                <small th:text="'Data de Cadastro: ' + ${#dates.format(acao.dataCadastro)}"></small>
+
+            </a>
+        </div>
+        <!-- Fim da div lista de acoes-->
+    </div>
+    <!-- Fim da div Container-->
+</section>
+
+</html>
