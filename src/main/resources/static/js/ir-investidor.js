@@ -4,6 +4,8 @@ $(function() {
 	});
 	
 	$(".list-group-item").hover(mouseEnter, mouseLeave);
+	
+	captalizarCodigoAcao();
 });
 
 function mouseEnter() {
@@ -12,4 +14,12 @@ function mouseEnter() {
 
 function mouseLeave() {
 	$(this).removeClass("active");
+}
+
+function captalizarCodigoAcao(){
+	$("#codigoAcao").on("input", function(){
+		setTimeout(() => {
+			$('#codigoAcao').val($(this).val().toUpperCase());
+		}, 400);
+	});
 }
