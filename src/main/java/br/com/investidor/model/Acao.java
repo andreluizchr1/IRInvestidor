@@ -42,6 +42,7 @@ public class Acao {
 	private boolean ativo;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(updatable = false, nullable = false)
 	private Date dataCadastro;
 
 	@Temporal(TemporalType.TIMESTAMP)
